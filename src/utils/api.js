@@ -4,9 +4,7 @@ const api = {
   playerSearch: function (name) {
     let name_part = name.trim();
     if (!name_part.includes(" ")) {
-      name_part = `${name}%25`;
-    } else {
-      name_part = `${name}`;
+      name_part = `${name_part}%25`;
     }
     var config = {
       method: 'get',
@@ -20,6 +18,7 @@ const api = {
    return axios(config);
   },
   playerInfo: function (id) {
+    console.log(id);
     var config = {
       method: 'get',
       url: `https://mlb-data.p.rapidapi.com/json/named.player_info.bam?sport_code='mlb'&player_id=${id}`,
