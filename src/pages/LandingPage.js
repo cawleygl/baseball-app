@@ -7,7 +7,7 @@ function LandingPage() {
 
   const [player, setPlayer] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedPlayer, setSelectedPlayer] = useState('');
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   useEffect(() => {
     console.log("SelectedPlayer:", selectedPlayer);
@@ -69,10 +69,11 @@ function LandingPage() {
         </ButtonGroup>
 
       </Grid>
+      {selectedPlayer ? 
       <Grid item xs={8}>
         <Card {...selectedPlayer} />
       </Grid>
-
+      : null }
     </Grid>
   )
 }
