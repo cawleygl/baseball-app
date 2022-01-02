@@ -29,6 +29,19 @@ const api = {
       }
     };
    return axios(config);
+  },
+  teamRoster: function (id) {
+    console.log(id);
+    var config = {
+      method: 'get',
+      url: `https://mlb-data.p.rapidapi.com/json/named.roster_40.bam?team_id=${id}`,
+      headers: { 
+        'x-rapidapi-host': 'mlb-data.p.rapidapi.com', 
+        'x-rapidapi-key': '57e5dce244msh89bb79ca2ceb6d6p1f5460jsn8aa022ab1847',
+        'Content-Type': 'application/json'
+      }
+    };
+   return axios(config);
   }
 
 };
