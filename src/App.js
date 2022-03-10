@@ -10,8 +10,8 @@ function App() {
 return (
   <div className="App">
       <ButtonAppBar />
-      <Container maxWidth="sm">
-        <TeamRosters />
+      <Container maxWidth="xl">
+        <PlayerSearch />
       </Container>
 
   </div>

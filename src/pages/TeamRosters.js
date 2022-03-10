@@ -5,18 +5,24 @@ import teamData from '../utils/teamData';
 
 function LandingPage() {
 
-  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [selectedTeamAll, setSelectedTeamAll] = useState(null);
+  const [selectedTeamLineup, setSelectedTeamLineup] = useState(null);
+  const [selectedTeamRotation, setSelectedTeamRotation] = useState(null);
 
   useEffect(() => {
-    console.log("SelectedTeam:", selectedTeam);
-  }, [selectedTeam]);
+    console.log("All Players:", selectedTeamAll);
+    console.log("Starting Lineup:", selectedTeamLineup);
+    console.log("Pitching Rotation:", selectedTeamRotation);
 
-  const handleTeamSelect = teamID => {
-    api.teamRoster(teamID)
-      .then(res => {
-        setSelectedTeam(res.data.roster_40.queryResults.row);
-      })
-      .catch(err => console.log(err));
+  }, [selectedTeamAll, selectedTeamLineup, selectedTeamRotation]);
+
+  const handleTeamSelect = async (teamID) => {
+    const roster = await api.teamRoster(teamID);
+    setSelectedTeamAll(roster);
+    setSelectedTeamLineup(roster);
+    setSelectedTeamRotation(roster);
+
+    console.log("Roster Return", roster);
   };
 
   return (
@@ -42,9 +48,9 @@ function LandingPage() {
 
         </ButtonGroup>
       </Grid>
-      {selectedTeam ?
+      {selectedTeamAll ?
         <Grid item xs={8}>
-          
+
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -56,7 +62,7 @@ function LandingPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {selectedTeam.map((player) => (
+              {selectedTeamAll.map((player) => (
                 <TableRow
                   key={player.player_id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

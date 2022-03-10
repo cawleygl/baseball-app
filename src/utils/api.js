@@ -30,8 +30,8 @@ const api = {
     };
    return axios(config);
   },
-  teamRoster: function (id) {
-    console.log(id);
+  teamRoster: async function (id) {
+    console.log("Team ID:", id);
     var config = {
       method: 'get',
       url: `https://mlb-data.p.rapidapi.com/json/named.roster_40.bam?team_id=${id}`,
@@ -41,9 +41,10 @@ const api = {
         'Content-Type': 'application/json'
       }
     };
-   return axios(config);
+    const res = await axios(config)
+      console.log("Response:", res.data.roster_40.queryResults.row);
+      return res.data.roster_40.queryResults.row;
   }
-
 };
 
 export default api
